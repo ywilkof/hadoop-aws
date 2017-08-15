@@ -1,13 +1,11 @@
-package io.grhodes.hadoop.fs.s3a;
+package org.apache.hadoop.fs.s3a;
 
 import com.amazonaws.event.ProgressEvent;
 import com.amazonaws.event.ProgressListener;
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.transfer.TransferManager;
-import com.amazonaws.services.s3.transfer.TransferManagerConfiguration;
 import com.amazonaws.services.s3.transfer.Upload;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -22,8 +20,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
-import static io.grhodes.hadoop.fs.s3a.Constants.*;
 
 public class S3AOutputStream extends OutputStream {
   private OutputStream backupStream;
@@ -57,11 +53,11 @@ public class S3AOutputStream extends OutputStream {
     this.statistics = statistics;
     this.serverSideEncryptionAlgorithm = serverSideEncryptionAlgorithm;
 
-    partSize = conf.getLong(MULTIPART_SIZE, DEFAULT_MULTIPART_SIZE);
-    partSizeThreshold = conf.getInt(MIN_MULTIPART_THRESHOLD, DEFAULT_MIN_MULTIPART_THRESHOLD);
+    partSize = conf.getLong(Constants.MULTIPART_SIZE, Constants.DEFAULT_MULTIPART_SIZE);
+    partSizeThreshold = conf.getInt(Constants.MIN_MULTIPART_THRESHOLD, Constants.DEFAULT_MIN_MULTIPART_THRESHOLD);
 
-    if (conf.get(BUFFER_DIR, null) != null) {
-      lDirAlloc = new LocalDirAllocator(BUFFER_DIR);
+    if (conf.get(Constants.BUFFER_DIR, null) != null) {
+      lDirAlloc = new LocalDirAllocator(Constants.BUFFER_DIR);
     } else {
       lDirAlloc = new LocalDirAllocator("${hadoop.tmp.dir}/s3a");
     }
