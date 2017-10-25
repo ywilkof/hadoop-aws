@@ -1,1 +1,3 @@
 org.apache.hadoop.fs.s3a.S3AFileSystem
+org.apache.hadoop.fs.s3native.NativeS3FileSystem
+org.apache.hadoop.fs.s3.S3FileSystem
