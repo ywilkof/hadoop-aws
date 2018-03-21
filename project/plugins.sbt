@@ -1,1 +1,1 @@
-addSbtPlugin("me.lessis" % "bintray-sbt" % "0.3.0")
+addSbtPlugin("com.frugalmechanic" % "fm-sbt-s3-resolver" % "0.14.0")
